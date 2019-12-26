@@ -15,6 +15,8 @@
 		BEFC9B7D23B454BA00E2A546 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEFC9B7B23B454BA00E2A546 /* LaunchScreen.storyboard */; };
 		BEFC9B8823B454BA00E2A546 /* iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFC9B8723B454BA00E2A546 /* iosTests.swift */; };
 		BEFC9B9323B454BA00E2A546 /* iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFC9B9223B454BA00E2A546 /* iosUITests.swift */; };
+		BEFC9BAF23B45E6B00E2A546 /* SharedCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFC9BAE23B45E6B00E2A546 /* SharedCode.framework */; };
+		BEFC9BB023B45E6B00E2A546 /* SharedCode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BEFC9BAE23B45E6B00E2A546 /* SharedCode.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		BEFC9BB123B45E6B00E2A546 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BEFC9BB023B45E6B00E2A546 /* SharedCode.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		BEFC9B6D23B454B700E2A546 /* ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEFC9B7023B454B700E2A546 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +65,7 @@
 		BEFC9B8E23B454BA00E2A546 /* iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEFC9B9223B454BA00E2A546 /* iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosUITests.swift; sourceTree = "<group>"; };
 		BEFC9B9423B454BA00E2A546 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BEFC9BAE23B45E6B00E2A546 /* SharedCode.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SharedCode.framework; path = "../SharedCode/build/xcode-frameworks/SharedCode.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEFC9BAF23B45E6B00E2A546 /* SharedCode.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +101,7 @@
 				BEFC9B8623B454BA00E2A546 /* iosTests */,
 				BEFC9B9123B454BA00E2A546 /* iosUITests */,
 				BEFC9B6E23B454B700E2A546 /* Products */,
+				BEFC9BAD23B45E6B00E2A546 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,6 +155,14 @@
 			path = iosUITests;
 			sourceTree = "<group>";
 		};
+		BEFC9BAD23B45E6B00E2A546 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BEFC9BAE23B45E6B00E2A546 /* SharedCode.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,9 +170,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BEFC9B9723B454BA00E2A546 /* Build configuration list for PBXNativeTarget "ios" */;
 			buildPhases = (
+				BEFC9BB223B45EA800E2A546 /* Compile Kotlin Native Shared Code */,
 				BEFC9B6923B454B700E2A546 /* Sources */,
 				BEFC9B6A23B454B700E2A546 /* Frameworks */,
 				BEFC9B6B23B454B700E2A546 /* Resources */,
+				BEFC9BB123B45E6B00E2A546 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -262,6 +291,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		BEFC9BB223B45EA800E2A546 /* Compile Kotlin Native Shared Code */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Compile Kotlin Native Shared Code";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd $SRCROOT/../SharedCode/build/xcode-frameworks/\n./gradlew :SharedCode:packForXCode -PXCODE_CONFIGURATION=${CONFIGURATION}\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BEFC9B6923B454B700E2A546 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -352,6 +402,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../SharedCode/build/xcode-frameworks";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -412,6 +463,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../SharedCode/build/xcode-frameworks";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -436,13 +488,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ios/Preview Content\"";
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../SharedCode/build/xcode-frameworks/SharedCode.framework";
 				INFOPLIST_FILE = ios/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trickring.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trickring.kotlinnative;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -455,13 +509,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ios/Preview Content\"";
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../SharedCode/build/xcode-frameworks/SharedCode.framework";
 				INFOPLIST_FILE = ios/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trickring.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trickring.kotlinnative;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
